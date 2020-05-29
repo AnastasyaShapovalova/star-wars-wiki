@@ -17,9 +17,15 @@ export default class SwapiService {
         return response.results;
     }
 
-    getPerson(id) {
+    getPeople(id) {
         return this.getData(`/people/${id}/`);
     }
+
+
+    getPlanet(id) {
+    return this.getData(`/planets/${id}/`);
+  }
 }
+
 
 
