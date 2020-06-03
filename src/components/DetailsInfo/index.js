@@ -1,3 +1,3 @@
-import DetailsInfo from './DetailsInfo'
+import DetailsInfo from './DetailsInfo';
 
 export default DetailsInfo;

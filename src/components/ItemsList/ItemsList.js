@@ -1,6 +1,8 @@
 import React from 'react';
 
 import './ItemsList.css';
+
+
 const ItemsList = () => {
     return (
         <ul className = "ItemsList">

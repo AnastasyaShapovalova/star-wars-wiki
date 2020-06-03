@@ -23,7 +23,7 @@ const DetailsInfo = () => {
                 </li>
             </ul>
        </div>
-        </div>
+    </div>
     )
 }
 
