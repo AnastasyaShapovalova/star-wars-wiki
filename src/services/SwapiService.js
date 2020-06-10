@@ -47,7 +47,7 @@ export default class SwapiService {
             name: person.name,
             gender: person.gender,
             mass: person.mass,
-            homeWorld: person.homeWorld,
+            birthDate: person.birth_year,
         }
     }
 }
