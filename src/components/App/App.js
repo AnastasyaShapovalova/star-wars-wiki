@@ -1,23 +1,27 @@
 import React from 'react';
 
-
 import './App.css';
 
 import Header from '../Header';
 import RandomPlanet from '../RandomPlanet';
+import ErrorTest from '../ErrorTest';
+import ErrorComponent from '../ErrorComponent';
+import PeoplePage from '../PeoplePage';
+import SwapiService from '../../services/SwapiService';
 import ItemsList from '../ItemsList';
 import DetailsInfo from '../DetailsInfo';
-import ErrorTest from '../ErrorTest';
 
 class App extends React.Component {
 
+    swapi = new SwapiService();
+
     state = {
         isRandomPlanet: true,
-        selectedPerson: 3
+        error: false
     }
 
     componentDidCatch(){
-        console.log('произошла ошибка')
+        this.setState({ error:true });
     }
 
     onTogglePlanet = () => {
@@ -27,13 +31,11 @@ class App extends React.Component {
         });
     }
 
-    onPersonSelect = (id) => {
-        this.setState({
-            selectedPerson: id
-        });
-    }
 
     render() {
+        if(this.state.error) {
+            return <ErrorComponent />
+        }
         return (
             <div className="App">
                 <Header />
@@ -43,12 +45,21 @@ class App extends React.Component {
                         on/off planet
                 </button>
                 <ErrorTest />
-                <div className="d-flex justify-content-between">
-                    <ItemsList onItemClick = {this.onPersonSelect} />
-                    <DetailsInfo 
-                       personId = {this.state.selectedPerson} 
+                <PeoplePage />
+                <div className="PeoplePage d-flex justify-content-between">
+                    <ItemsList
+                        onItemClick = {this.onPersonSelect}
+                        getData = {this.swapi.getAllPlanet}
+                        renderItem = {(item) => 
+                            `${item.name} (diameter ${item.
+                                diameter})`
+                            }
+                    />
+                    <DetailsInfo
+                        personId={this.state.selectedPerson}
                     />
                 </div>
+               
             </div>
         )
     }
