@@ -29,9 +29,6 @@ export default class RandomPlanet extends React.Component {
     clearInterval(this.interval); 
   }
 
-  
-
-
   onError = () => {
     this.setState({
       error: true,

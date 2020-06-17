@@ -7,16 +7,15 @@ import RandomPlanet from '../RandomPlanet';
 import ErrorTest from '../ErrorTest';
 import ErrorComponent from '../ErrorComponent';
 import PeoplePage from '../PeoplePage';
+import PlanetPage from '../PlanetPage';
 import SwapiService from '../../services/SwapiService';
-import ItemsList from '../ItemsList';
-import DetailsInfo from '../DetailsInfo';
+import { SwapiProvider } from '../SwapiServiceContext';
 
-class App extends React.Component {
+export default class App extends React.Component {
 
     swapi = new SwapiService();
 
     state = {
-        isRandomPlanet: true,
         error: false
     }
 
@@ -36,36 +35,19 @@ class App extends React.Component {
         if(this.state.error) {
             return <ErrorComponent />
         }
+
         return (
+            <SwapiProvider value = {this.swapi}>
             <div className="App">
                 <Header />
-                {this.state.isRandomPlanet && <RandomPlanet /> }
-                <button 
-                    onClick = { this.onTogglePlanet }>
-                        on/off planet
-                </button>
+                <RandomPlanet />
                 <ErrorTest />
                 <PeoplePage />
-                <div className="PeoplePage d-flex justify-content-between">
-                    <ItemsList
-                        onItemClick = {this.onPersonSelect}
-                        getData = {this.swapi.getAllPlanet}
-                        renderItem = {(item) => 
-                            `${item.name} (diameter ${item.
-                                diameter})`
-                            }
-                    />
-                    <DetailsInfo
-                        personId={this.state.selectedPerson}
-                    />
-                </div>
-               
+                <PlanetPage />
             </div>
+            </SwapiProvider>
+        
         )
     }
  }
     
-
-   
-
-export default App;
