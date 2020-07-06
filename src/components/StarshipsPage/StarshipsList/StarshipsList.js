@@ -1,11 +1,11 @@
 import React from 'react';
 
 import './ItemsList.css';
-import SwapiService from '../../services/SwapiService';
-import  withData from '../helpers/withData';
+import SwapiService from '../../../services/SwapiService';
+import  withData from '../../helpers/withData';
 
 
-const ItemsList = (props) => {
+const StarshipsList = (props) => {
 
     const { data, onItemClick, renderItem } = props;
 
@@ -34,6 +34,6 @@ const ItemsList = (props) => {
         );
     }
 
-const { getAllPeople } = new SwapiService();
+const { getAllStarships} = new SwapiService();
 
-export default withData(ItemsList, getAllPeople);
+export default withData(StarshipsList, getAllStarships);

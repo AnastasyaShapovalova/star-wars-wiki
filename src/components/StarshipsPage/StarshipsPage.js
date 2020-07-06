@@ -1,6 +1,6 @@
 import React from 'react';
-import PeopleList from './PeopleList';
-import PersonInfo from './PersonInfo';
+import StarshipsList from './StarshipsList';
+import StarshipsInfo from './StarshipsInfo';
 
 import './PeoplePage.css'
 import ErrorComponent from '../ErrorComponent';
@@ -8,12 +8,12 @@ import SwapiService from '../../services/SwapiService';
 import Row from '../Row';
 
 
-export default class PeoplePage extends React.Component{
+export default class StarshipsPage extends React.Component{
 
     swapi = new SwapiService();
 
     state = {
-        selectedPerson: 3,
+        selectedStarships: 3,
         error: false,
     }
 
@@ -22,9 +22,9 @@ export default class PeoplePage extends React.Component{
     }
        
 
-    onPersonSelect = (id) => {
+    onStarshipsSelect = (id) => {
         this.setState({
-            selectedPerson: id
+            selectedStarships: id
         });
     }
 
@@ -33,25 +33,25 @@ export default class PeoplePage extends React.Component{
             return <ErrorComponent />
         }
 
-        const peopleList = (
-            <PeopleList
-                onItemClick={this.onPersonSelect}
+        const starshipsList = (
+            <StarshipsList
+                onItemClick={this.onStarshipsSelect}
                 renderItem={(item) =>
                     `${item.name}
-                         (${item.gender}, ${item.mass}>kg)`
+                         (${item.model}, ${item.length}>m)`
                 }
             />
         );
 
-        const personInfo = (
-            <PersonInfo
-                personId={this.state.selectedPerson}
+        const starshipsInfo = (
+            <StarshipsInfo
+                StarshipsId={this.state.selectedStarships}
             />
         )
 
         return (
             <div className = "PeoplePage">
-                <Row left = {peopleList}  right = {personInfo}/>
+                <Row left={starshipsList} right={starshipsInfo}/>
    
             </div>
         )

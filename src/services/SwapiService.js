@@ -33,9 +33,29 @@ export default class SwapiService {
         return this.transformPlanet(planet);
   }
 
+    getAllStarships = async () => {
+        const response = await this.getData('/starships/');
+        return response.results.map(this.transformStarships);
+    }
+
+    async getStarships(id) {
+        const starships = await this.getData(`/starships/${id}/`);
+        return this.transformStarships(starships);
+    }
+
   getId(item) {
       return item.url.match(/\/([0-9]*)\/$/)[1];
   }
+
+    transformStarships = (starships) => {
+        return {
+            id: this.getId(starships),
+            name: starships.name,
+            model: starships.model ,
+            length: starships.length ,
+            manufacturer: starships.manufacturer ,
+        }
+    }
 
     transformPlanet = (planet) => {
         return {

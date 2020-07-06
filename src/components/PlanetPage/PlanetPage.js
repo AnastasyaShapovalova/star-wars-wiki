@@ -1,11 +1,12 @@
 import React from 'react';
-import ItemsList from '../ItemsList';
-import DetailsInfo from '../DetailsInfo';
+import PlanetInfo from './PlanetInfo';
+
 
 import './PlanetPage.css'
 import ErrorComponent from '../ErrorComponent';
 import SwapiService from '../../services/SwapiService';
 import Row from '../Row';
+import PlanetList from './PlanetList';
 
 
 export default class PlanetPage extends React.Component {
@@ -13,7 +14,7 @@ export default class PlanetPage extends React.Component {
     swapi = new SwapiService();
 
     state = {
-        selectedPerson: 3,
+        selectedPlanet: 3,
         error: false,
     }
 
@@ -22,9 +23,9 @@ export default class PlanetPage extends React.Component {
     }
 
 
-    onPersonSelect = (id) => {
+    onPlanetSelect = (id) => {
         this.setState({
-            selectedPerson: id
+            selectedPlanet: id
         });
     }
 
@@ -33,25 +34,25 @@ export default class PlanetPage extends React.Component {
             return <ErrorComponent />
         }
 
-        const itemsList = (
-            <ItemsList
-                onItemClick={this.onPersonSelect}
+        const planetList = (
+            <PlanetList
+                onItemClick={this.onPlanetSelect}
                 renderItem={(item) =>
                     `${item.name}
-                         (${item.gender}, ${item.mass}>kg)`
+                         (${item.population}, ${item.gravity})`
                 }
             />
         );
 
-        const detailsInfo = (
-            <DetailsInfo
-                personId={this.state.selectedPerson}
+        const planetInfo = (
+            <PlanetInfo
+                planetId={this.state.selectedPlanet}
             />
         )
 
         return (
             <div className="PlanetPage">
-                <Row left={itemsList} right={detailsInfo} />
+                <Row left={planetList} right={planetInfo} />
 
             </div>
         )
