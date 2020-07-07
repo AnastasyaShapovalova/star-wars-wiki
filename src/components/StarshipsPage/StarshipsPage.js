@@ -45,7 +45,7 @@ export default class StarshipsPage extends React.Component{
 
         const starshipsInfo = (
             <StarshipsInfo
-                StarshipsId={this.state.selectedStarships}
+                starshipsId={this.state.selectedStarships}
             />
         )
 

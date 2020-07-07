@@ -9,7 +9,7 @@ export default class StarshipsInfo extends React.Component {
     static contextType = SwapiContext;
 
     state = {
-        starships: null
+        starships:null
     };
 
     componentDidMount() {
@@ -28,10 +28,11 @@ export default class StarshipsInfo extends React.Component {
             return;
         }
 
-        this.context.getStarships(starshipsId).then((starships) => {
+        this.context.getStarship(starshipsId).then((starships) => {
             this.setState({ starships });
         })
     }
+    
 
     render () {
 
@@ -40,6 +41,7 @@ export default class StarshipsInfo extends React.Component {
         }
 
         const { id, name, model, length, manufacturer } = this.state.starships;
+        
 
         return(
             <div className = "DetailsInfo" >
